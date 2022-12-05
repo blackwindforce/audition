@@ -1,28 +1,52 @@
 <script setup lang="ts">
-import {
-  ArrowDownIcon,
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  ArrowUpIcon,
-} from "@heroicons/vue/24/outline";
+import MyDirection from "@/components/MyDirection.vue";
+
+// http://www.redbana.com/sub/gamescore.asp
+
+// type Direction = Readonly<{
+//   direction: "N" | "NE" | "E" | "SE" | "S" | "SW" | "W" | "NW";
+//   opposite: boolean;
+//   status: boolean;
+// }>;
+
+// defineProps<{
+//   control: "4-key" | "8-key";
+//   ok: boolean;
+// }>();
+
+// provide success and success-color?
+
+const states = [
+  { direction: "N", opposite: false },
+  { direction: "N", opposite: true },
+  { direction: "NE", opposite: false },
+  { direction: "NE", opposite: true },
+  { direction: "E", opposite: false },
+  { direction: "E", opposite: true },
+  { direction: "SE", opposite: false },
+  { direction: "SE", opposite: true },
+  { direction: "S", opposite: false },
+  { direction: "S", opposite: true },
+  { direction: "SW", opposite: false },
+  { direction: "SW", opposite: true },
+  { direction: "W", opposite: false },
+  { direction: "W", opposite: true },
+  { direction: "NW", opposite: false },
+  { direction: "NW", opposite: true },
+] as const;
 </script>
 
 <template>
-  <main
-    class="flex h-screen items-center justify-center gap-x-4 dark:bg-slate-900"
-  >
-    <ArrowUpIcon
-      class="h-12 w-12 rounded-full stroke-white transition-[background-color] dark:bg-blue-500 hover:dark:bg-green-500"
-    ></ArrowUpIcon>
-    <ArrowRightIcon
-      class="h-12 w-12 rounded-full stroke-white transition-[background-color] dark:bg-blue-500 hover:dark:bg-green-500"
-    ></ArrowRightIcon>
-    <ArrowDownIcon
-      class="h-12 w-12 rounded-full stroke-white transition-[background-color] dark:bg-blue-500 hover:dark:bg-green-500"
-    ></ArrowDownIcon>
-    <ArrowLeftIcon
-      class="h-12 w-12 rounded-full stroke-white transition-[background-color] dark:bg-blue-500 hover:dark:bg-green-500"
-    ></ArrowLeftIcon>
+  <main class="grid h-screen place-items-center dark:bg-black">
+    <div class="flex items-center gap-x-2">
+      <MyDirection
+        v-for="(state, index) of states"
+        :key="index"
+        :direction="state.direction"
+        :opposite="state.opposite"
+      >
+      </MyDirection>
+    </div>
   </main>
 </template>
 
